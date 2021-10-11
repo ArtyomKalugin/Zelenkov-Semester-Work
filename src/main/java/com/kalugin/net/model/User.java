@@ -10,7 +10,7 @@ public class User {
     private String login;
     private String password;
 
-    public User(int id, String nickname, String firstName, String secondName, String email, String avatar,
+    public User(int id, String nickname, String firstName, String secondName, String email,
                 String login, String password) {
         this.id = id;
         this.nickname = nickname;
@@ -22,13 +22,12 @@ public class User {
         this.password = password;
     }
 
-    public User(String nickname, String firstName, String secondName, String email, String avatar,
+    public User(String nickname, String firstName, String secondName, String email,
                 String login, String password) {
         this.nickname = nickname;
         this.firstName = firstName;
         this.secondName = secondName;
         this.email = email;
-//        this.avatar = avatar;
         this.login = login;
         this.password = password;
     }

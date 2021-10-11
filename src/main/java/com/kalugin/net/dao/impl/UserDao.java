@@ -6,9 +6,8 @@ import com.kalugin.net.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao implements Dao<User> {
@@ -21,8 +20,32 @@ public class UserDao implements Dao<User> {
     }
 
     @Override
-    public List getAll() {
-        return null;
+    public List<User> getAll() {
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM users";
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            List<User> users = new ArrayList<>();
+
+            while (resultSet.next()) {
+                User user = new User(
+                        resultSet.getInt("id"),
+                        resultSet.getString("nickname"),
+                        resultSet.getString("first_name"),
+                        resultSet.getString("second_name"),
+                        resultSet.getString("email"),
+                        resultSet.getString("login"),
+                        resultSet.getString("password")
+                );
+                users.add(user);
+            }
+
+            return users;
+        } catch (SQLException throwables) {
+            LOGGER.warn("Failed execute getAll query.", throwables);
+            return new ArrayList<>();
+        }
     }
 
     @Override

@@ -68,55 +68,46 @@
     </style>
 </head>
 <body>
+
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="/got"><img alt="got_img" src="/static/img/food.jpeg" width="50" height="50" class="rounded-circle" style=""></a>
+    <a class="navbar-brand" href="/info"><img alt="got_img" src="/static/img/food.jpeg" width="50" height="50" class="rounded-circle" style=""></a>
 
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="/main">О 8 сезоне</a>
+            <a class="nav-link" href="/ifno">Об этом сайте</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/theories">Теории</a>
+            <a class="nav-link" href="/theories">Рецепты</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/victorine">Пройти опрос</a>
+            <a class="nav-link" href="/victorine">Статьи</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/victorine">Все пользователи</a>
         </li>
     </ul>
 
+    <#if user?has_content>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <img alt="user_img" src="/static/img/{{session['photo']}}" width="50" height="50" class="rounded-circle" style="margin-top: 20px;">
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cabinet"><strong>${user.nickname}</strong></a>
+            </li>
+        </ul>
+    <#else>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/signIn">Войти</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Регистрация</a>
+            </li>
+        </ul>
+    </#if>
 
-
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="/sign_in">Войти</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/login">Регистрация</a>
-        </li>
-    </ul>
 </nav>
-
-<#--      {% if "username" in session %}-->
-<#--        <ul class="navbar-nav ml-auto">-->
-<#--          <li class="nav-item">-->
-<#--            <img alt="user_img" src="/static/img/{{session['photo']}}" width="50" height="50" class="rounded-circle" style="margin-top: 20px;">-->
-<#--          </li>-->
-<#--          <li class="nav-item">-->
-<#--            <a class="nav-link" href="/cabinet"><strong>{{session['username']}}</strong></a>-->
-<#--          </li>-->
-<#--        </ul>-->
-<#--      {% endif %}-->
-
-<#--      {% if "username" not in session %}-->
-<#--        <ul class="navbar-nav ml-auto">-->
-<#--          <li class="nav-item">-->
-<#--            <a class="nav-link" href="/sign_in">Войти</a>-->
-<#--          </li>-->
-<#--          <li class="nav-item">-->
-<#--            <a class="nav-link" href="/login">Регистрация</a>-->
-<#--          </li>-->
-<#--        </ul>-->
-<#--      {% endif %}-->
-<#--    </nav>-->
 
 <div class="mainer">
     <main role="main" class="container">
