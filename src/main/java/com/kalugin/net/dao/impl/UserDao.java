@@ -16,7 +16,32 @@ public class UserDao implements Dao<User> {
 
     @Override
     public User get(int id) {
-        return null;
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM users";
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            User user = null;
+
+            while (resultSet.next()) {
+                if(resultSet.getInt("id") == id) {
+                    user = new User(
+                            resultSet.getInt("id"),
+                            resultSet.getString("nickname"),
+                            resultSet.getString("first_name"),
+                            resultSet.getString("second_name"),
+                            resultSet.getString("email"),
+                            resultSet.getString("login"),
+                            resultSet.getString("password")
+                    );
+                }
+            }
+
+            return user;
+        } catch (SQLException throwables) {
+            LOGGER.warn("Failed execute get query.", throwables);
+            return null;
+        }
     }
 
     @Override

@@ -14,7 +14,7 @@
             margin-bottom: 20px;
         }
         .srcshot::before {
-            content: "Железный трон";
+            content: "Еда";
             position: absolute;
             top: 0;
             left: 50%;
@@ -70,11 +70,11 @@
 <body>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <a class="navbar-brand" href="/info"><img alt="got_img" src="/static/img/food.jpeg" width="50" height="50" class="rounded-circle" style=""></a>
+    <a class="navbar-brand" href="/info"><img alt="food_img" src="/static/img/pancake.jpg" width="50" height="50" class="rounded-circle" style=""></a>
 
     <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-            <a class="nav-link" href="/ifno">Об этом сайте</a>
+            <a class="nav-link" href="/info">Об этом сайте</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/theories">Рецепты</a>

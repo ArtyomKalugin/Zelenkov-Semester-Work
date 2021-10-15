@@ -16,15 +16,19 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserDto> getAll() {
         List<User> users = userDao.getAll();
+
         return users.stream()
-                .map(user -> new UserDto(user.getNickname(), user.getFirstName(), user.getSecondName(),
+                .map(user -> new UserDto(user.getId(), user.getNickname(), user.getFirstName(), user.getSecondName(),
                         user.getEmail(), user.getLogin(), user.getPassword()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public UserDto get(int id) {
-        return null;
+       User user = userDao.get(id);
+
+       return new UserDto(user.getId(), user.getNickname(), user.getFirstName(), user.getSecondName(),
+               user.getEmail(), user.getLogin(), user.getPassword());
     }
 
     @Override

@@ -2,7 +2,7 @@
 
 <#macro title>
 <title>Авторизация</title>
-<link rel="shortcut icon" href="static/img/icon.png" type="image/png">
+<link rel="shortcut icon" href="static/img/pancake.jpg" type="image/jpg">
 </#macro>
 
 <#macro content>
