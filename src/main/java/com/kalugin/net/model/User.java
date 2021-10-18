@@ -6,30 +6,31 @@ public class User {
     private String firstName;
     private String secondName;
     private String email;
-//    private String avatar;
+    private String avatar;
     private String login;
     private String password;
 
     public User(int id, String nickname, String firstName, String secondName, String email,
-                String login, String password) {
+                String login, String password, String avatar) {
         this.id = id;
         this.nickname = nickname;
         this.firstName = firstName;
         this.secondName = secondName;
         this.email = email;
-//        this.avatar = avatar;
+        this.avatar = avatar;
         this.login = login;
         this.password = password;
     }
 
     public User(String nickname, String firstName, String secondName, String email,
-                String login, String password) {
+                String login, String password, String avatar) {
         this.nickname = nickname;
         this.firstName = firstName;
         this.secondName = secondName;
         this.email = email;
         this.login = login;
         this.password = password;
+        this.avatar = avatar;
     }
 
     public int getId() {
@@ -72,13 +73,13 @@ public class User {
         this.email = email;
     }
 
-//    public String getAvatar() {
-//        return avatar;
-//    }
-//
-//    public void setAvatar(String avatar) {
-//        this.avatar = avatar;
-//    }
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
     public String getLogin() {
         return login;

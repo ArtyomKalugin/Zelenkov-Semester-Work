@@ -32,7 +32,8 @@ public class UserDao implements Dao<User> {
                             resultSet.getString("second_name"),
                             resultSet.getString("email"),
                             resultSet.getString("login"),
-                            resultSet.getString("password")
+                            resultSet.getString("password"),
+                            resultSet.getString("avatar")
                     );
                 }
             }
@@ -43,6 +44,49 @@ public class UserDao implements Dao<User> {
             return null;
         }
     }
+
+    public User getByLogin(String login) {
+        try {
+            Statement statement = connection.createStatement();
+            String sql = "SELECT * FROM users";
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            User user = null;
+
+            while (resultSet.next()) {
+                if(resultSet.getString("login").equals(login)) {
+                    user = new User(
+                            resultSet.getInt("id"),
+                            resultSet.getString("nickname"),
+                            resultSet.getString("first_name"),
+                            resultSet.getString("second_name"),
+                            resultSet.getString("email"),
+                            resultSet.getString("login"),
+                            resultSet.getString("password"),
+                            resultSet.getString("avatar")
+                    );
+                }
+            }
+
+            return user;
+        } catch (SQLException throwables) {
+            LOGGER.warn("Failed execute get query.", throwables);
+            return null;
+        }
+    }
+
+    public void delete(int id) {
+        String sql = "DELETE FROM users WHERE id = " + id;
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            LOGGER.warn("Failed to delete user.", throwables);
+        }
+    }
+
 
     @Override
     public List<User> getAll() {
@@ -61,7 +105,8 @@ public class UserDao implements Dao<User> {
                         resultSet.getString("second_name"),
                         resultSet.getString("email"),
                         resultSet.getString("login"),
-                        resultSet.getString("password")
+                        resultSet.getString("password"),
+                        resultSet.getString("avatar")
                 );
                 users.add(user);
             }
@@ -75,8 +120,8 @@ public class UserDao implements Dao<User> {
 
     @Override
     public void save(User user) {
-        String sql = "INSERT INTO users (nickname, first_name, second_name, email, login, password) " +
-                "VALUES (?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO users (nickname, first_name, second_name, email, login, password, avatar) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?);";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -86,6 +131,7 @@ public class UserDao implements Dao<User> {
             preparedStatement.setString(4, user.getEmail());
             preparedStatement.setString(5, user.getLogin());
             preparedStatement.setString(6, user.getPassword());
+            preparedStatement.setString(7, user.getAvatar());
 
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {

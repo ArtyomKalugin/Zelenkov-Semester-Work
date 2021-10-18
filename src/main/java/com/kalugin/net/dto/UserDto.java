@@ -1,16 +1,17 @@
 package com.kalugin.net.dto;
 
 public class UserDto {
-    private int id;
+    private final int id;
     private String nickname;
     private String firstName;
     private String secondName;
     private String email;
-    private String login;
+    private final String login;
     private String hashPassword;
+    private String avatar;
 
     public UserDto(int id, String nickname, String firstName, String secondName, String email,
-                String login, String hashPassword) {
+                String login, String hashPassword, String avatar) {
         this.id = id;
         this.nickname = nickname;
         this.firstName = firstName;
@@ -18,6 +19,7 @@ public class UserDto {
         this.email = email;
         this.login = login;
         this.hashPassword = hashPassword;
+        this.avatar = avatar;
     }
 
     public String getNickname() {
@@ -66,5 +68,13 @@ public class UserDto {
 
     public int getId() {
         return id;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 }

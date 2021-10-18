@@ -34,11 +34,6 @@
         </p>
 
         <p class="lead">
-            Выберите аватар:<br>
-            <input name="avatar" type="file"/><br>
-        </p>
-
-        <p class="lead">
             Введите логин:<br>
             <input name="login" type="text"/><br>
         </p>

@@ -2,6 +2,7 @@ package com.kalugin.net.servlet;
 
 import com.cloudinary.Cloudinary;
 import com.kalugin.net.dao.impl.UserDao;
+import com.kalugin.net.dto.UserDto;
 import com.kalugin.net.helper.CloudinaryHelper;
 import com.kalugin.net.helper.ImageHelper;
 import com.kalugin.net.model.User;
@@ -21,7 +22,6 @@ import java.util.HashMap;
 public class LoginServlet extends HttpServlet {
 
     UserServiceImpl userService = new UserServiceImpl();
-//    private final Cloudinary cloudinary = CloudinaryHelper.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -38,18 +38,14 @@ public class LoginServlet extends HttpServlet {
         String email = req.getParameter("email");
         String login = req.getParameter("login");
         String password = req.getParameter("password");
-//        Part part = req.getPart("avatar");
 
-//        File avatar = ImageHelper.makeFile(part);
-//
-//        cloudinary.uploader().upload(avatar, new HashMap());
-
-        User newUser = new User(nickname, firstName, secondName, email, login, password);
+        User newUser = new User(nickname, firstName, secondName, email, login, password, "");
 
         userService.save(newUser);
+        UserDto user = userService.getByLogin(login);
 
         HttpSession session = req.getSession();
-        session.setAttribute("user", newUser);
+        session.setAttribute("user", user);
         session.setMaxInactiveInterval(60 * 60);
 
         Cookie userCookie = new Cookie("nickname", nickname);

@@ -16,33 +16,36 @@
         <td><p class="lead"><em>${user.firstName}  ${user.secondName}</em></p></td>
     </tr>
 </table>
-<form action="" method="post" novalidate enctype="multipart/form-data">
-    Смена аватарки
-    <table>
-        <tr>
-            <td>Поменять аватарку</td>
-            <td>Подтвердить</td>
-        </tr>
-    </table>
+<form action="/cabinet" method="post" novalidate enctype="multipart/form-data">
+    <p class="lead">
+        Смена аватарки
+    </p>
+
+    <p class="lead">
+        <input name="avatar" type="file">
+    </p>
+
+    <p class="lead">
+        <p class="lead"><input type="submit" value="Поменять">
+    </p>
 </form>
 
 <br>
 <table>
     <tr>
         <td><p class="lead">Ваша почта: ${user.email}</p></td>
-        <td><p class="lead">Ваш id: 0</p></td>
+        <td><p class="lead">Ваш id: ${user.id}</p></td>
     </tr>
     <tr>
-        <td><p class="lead">Добавить рецепт</p></td>
         <td><p class="lead"><a href="/add_theory">Добавить рецепт</a></p></td>
-    </tr>
-    <tr>
-        <td><p class="lead"><a href="/logout">Выйти</a></p></td>
-        <td><p class="lead"><a href="/delete">Удалить аккаунт</a></p></td>
+        <td><p class="lead"><a href="/read_my_theories">Мои рецепты</a></p></td>
     </tr>
 </table>
 <br>
-<p class="lead"><a href="/read_my_theories">Мои рецепты</a></p>
+    <tr>
+        <td><p class="lead"><a href="/logout">Выйти</a></p></td>
+        <td><p class="lead"><a href="/deleteUser">Удалить аккаунт</a></p></td>
+    </tr>
 <br>
 
 </#macro>

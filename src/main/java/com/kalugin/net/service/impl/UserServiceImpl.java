@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserServiceImpl implements UserService {
-    private final Dao<User> userDao = new UserDao();
+    private final UserDao userDao = new UserDao();
 
     @Override
     public List<UserDto> getAll() {
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
 
         return users.stream()
                 .map(user -> new UserDto(user.getId(), user.getNickname(), user.getFirstName(), user.getSecondName(),
-                        user.getEmail(), user.getLogin(), user.getPassword()))
+                        user.getEmail(), user.getLogin(), user.getPassword(), user.getAvatar()))
                 .collect(Collectors.toList());
     }
 
@@ -28,12 +28,25 @@ public class UserServiceImpl implements UserService {
        User user = userDao.get(id);
 
        return new UserDto(user.getId(), user.getNickname(), user.getFirstName(), user.getSecondName(),
-               user.getEmail(), user.getLogin(), user.getPassword());
+               user.getEmail(), user.getLogin(), user.getPassword(), user.getAvatar());
+    }
+
+    @Override
+    public UserDto getByLogin(String login) {
+        User user = userDao.getByLogin(login);
+
+        return new UserDto(user.getId(), user.getNickname(), user.getFirstName(), user.getSecondName(),
+                user.getEmail(), user.getLogin(), user.getPassword(), user.getAvatar());
     }
 
     @Override
     public void save(User user) {
         userDao.save(new User(user.getNickname(), user.getFirstName(), user.getSecondName(),
-                user.getEmail(), user.getLogin(), PasswordHelper.encrypt(user.getPassword())));
+                user.getEmail(), user.getLogin(), PasswordHelper.encrypt(user.getPassword()), user.getAvatar()));
+    }
+
+    @Override
+    public void delete(int id) {
+        userDao.delete(id);
     }
 }

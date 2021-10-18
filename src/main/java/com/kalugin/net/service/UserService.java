@@ -8,5 +8,7 @@ import java.util.List;
 public interface UserService {
     List<UserDto> getAll();
     UserDto get(int id);
+    UserDto getByLogin(String login);
     void save(User user);
+    void delete(int id);
 }
