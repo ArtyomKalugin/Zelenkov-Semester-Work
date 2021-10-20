@@ -1,20 +1,28 @@
 package com.kalugin.net.servlet;
 
 import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
+import com.kalugin.net.dto.UserDto;
 import com.kalugin.net.helper.CloudinaryHelper;
 import com.kalugin.net.helper.ImageHelper;
 import com.kalugin.net.model.User;
+import com.kalugin.net.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 
+@MultipartConfig
 @WebServlet(name = "personalCabinetServlet", urlPatterns = "/cabinet")
 public class PersonalCabinetServlet extends HttpServlet {
-//    private final Cloudinary cloudinary = CloudinaryHelper.getInstance();
+    private final Cloudinary cloudinary = CloudinaryHelper.getInstance();
+    private final UserServiceImpl userService = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,11 +36,15 @@ public class PersonalCabinetServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Part part = req.getPart("avatar");
 
-        File avatar = ImageHelper.makeFile(part);
+        File file = ImageHelper.makeFile(part);
 
-//        cloudinary.uploader().upload(avatar, new HashMap());
+        Map upload = cloudinary.uploader().upload(file, ObjectUtils.asMap("public_id", file.getName()));
 
-//        userService.save(newUser);
+        HttpSession session = req.getSession();
+        UserDto user = (UserDto) session.getAttribute("user");
+        user.setAvatar((String) upload.get("url"));
+
+        userService.changeAvatar(user.getId(), user.getAvatar());
 
         resp.sendRedirect("/cabinet");
     }

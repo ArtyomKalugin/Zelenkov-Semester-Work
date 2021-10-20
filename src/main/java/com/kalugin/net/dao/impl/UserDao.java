@@ -76,14 +76,27 @@ public class UserDao implements Dao<User> {
     }
 
     public void delete(int id) {
-        String sql = "DELETE FROM users WHERE id = " + id;
+        String sql = "DELETE FROM users WHERE id = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
-
+            preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
             LOGGER.warn("Failed to delete user.", throwables);
+        }
+    }
+
+    public void changeAvatar(int id, String url) {
+        String sql = "UPDATE users SET avatar = ? WHERE users.id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, url);
+            preparedStatement.setInt(2, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            LOGGER.warn("Failed to update user.", throwables);
         }
     }
 

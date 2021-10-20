@@ -11,13 +11,32 @@
 <br>
 <table>
     <tr>
-        <td><img alt="user_img" src="/static/img/{{p}}" width="50" height="50" class="rounded-circle"></td>
-        <td><p class="lead"><strong>${user.nickname}</strong></p></td>
-        <td><p class="lead"><em>${user.firstName}  ${user.secondName}</em></p></td>
+        <td><img alt="user_img" src="${user.avatar}" width="150" height="150" class="rounded-circle"></td>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        <h2>
+                            <strong>${user.nickname}</strong>
+                        </h2>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td>
+                        <h3>
+                            <em>${user.firstName}  ${user.secondName}</em>
+                        </h3>
+                    </td>
+                </tr>
+            </table>
+        </td>
     </tr>
 </table>
 <form action="/cabinet" method="post" novalidate enctype="multipart/form-data">
-    <p class="lead">
+    <br>
+    <p style="font-size:25px">
         Смена аватарки
     </p>
 
@@ -37,8 +56,8 @@
         <td><p class="lead">Ваш id: ${user.id}</p></td>
     </tr>
     <tr>
-        <td><p class="lead"><a href="/add_theory">Добавить рецепт</a></p></td>
-        <td><p class="lead"><a href="/read_my_theories">Мои рецепты</a></p></td>
+        <td><p class="lead"><a href="/add_recipe">Добавить рецепт</a></p></td>
+        <td><p class="lead"><a href="/read_my_recipes">Мои рецепты</a></p></td>
     </tr>
 </table>
 <br>

@@ -49,4 +49,9 @@ public class UserServiceImpl implements UserService {
     public void delete(int id) {
         userDao.delete(id);
     }
+
+    @Override
+    public void changeAvatar(int id, String url) {
+        userDao.changeAvatar(id, url);
+    }
 }

@@ -11,4 +11,5 @@ public interface UserService {
     UserDto getByLogin(String login);
     void save(User user);
     void delete(int id);
+    void changeAvatar(int id, String url);
 }

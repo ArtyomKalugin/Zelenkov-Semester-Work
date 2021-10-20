@@ -90,8 +90,9 @@
     <#if user?has_content>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <img alt="user_img" src="/static/img/{{session['photo']}}" width="50" height="50" class="rounded-circle" style="margin-top: 20px;">
+                <img alt="user_img" src="${user.avatar}" width="50" height="50" class="rounded-circle" style="">
             </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="/cabinet"><strong>${user.nickname}</strong></a>
             </li>

@@ -13,15 +13,12 @@ import org.slf4j.LoggerFactory;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.awt.*;
-import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 
 @WebServlet(name = "loginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 
-    UserServiceImpl userService = new UserServiceImpl();
+    private final UserServiceImpl userService = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,7 +36,8 @@ public class LoginServlet extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("password");
 
-        User newUser = new User(nickname, firstName, secondName, email, login, password, "");
+        User newUser = new User(nickname, firstName, secondName, email, login, password,
+                "https://res.cloudinary.com/dwzcudur6/image/upload/v1634711026/defaultUser_msfkll.png");
 
         userService.save(newUser);
         UserDto user = userService.getByLogin(login);
