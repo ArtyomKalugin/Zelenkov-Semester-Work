@@ -56,7 +56,7 @@
             background-color: white;
         }
         textarea {
-            width: 1100px;
+            width: 710px;
             height: 400px;
         }
         table {

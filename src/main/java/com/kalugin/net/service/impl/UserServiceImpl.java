@@ -1,6 +1,5 @@
 package com.kalugin.net.service.impl;
 
-import com.kalugin.net.dao.Dao;
 import com.kalugin.net.dao.impl.UserDao;
 import com.kalugin.net.dto.UserDto;
 import com.kalugin.net.helper.PasswordHelper;

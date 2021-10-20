@@ -45,7 +45,7 @@
     </p>
 
     <p class="lead">
-        <p class="lead"><input type="submit" value="Поменять">
+        <input type="submit" value="Поменять">
     </p>
 </form>
 
@@ -56,7 +56,7 @@
         <td><p class="lead">Ваш id: ${user.id}</p></td>
     </tr>
     <tr>
-        <td><p class="lead"><a href="/add_recipe">Добавить рецепт</a></p></td>
+        <td><p class="lead"><a href="/createRecipe">Добавить рецепт</a></p></td>
         <td><p class="lead"><a href="/read_my_recipes">Мои рецепты</a></p></td>
     </tr>
 </table>
