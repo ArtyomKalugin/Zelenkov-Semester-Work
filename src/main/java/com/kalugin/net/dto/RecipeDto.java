@@ -2,26 +2,23 @@ package com.kalugin.net.dto;
 
 public class RecipeDto {
     private final int id;
-    private final int userId;
+    private final String userNickname;
     private final String title;
     private final String text;
     private final String photo;
+    private final String data;
 
-
-    public RecipeDto(int id, int userId, String title, String text, String photo) {
+    public RecipeDto(int id, String userNickname, String title, String text, String photo, String data) {
         this.id = id;
-        this.userId = userId;
+        this.userNickname = userNickname;
         this.title = title;
         this.text = text;
         this.photo = photo;
+        this.data = data;
     }
 
     public int getId() {
         return id;
-    }
-
-    public int getUserId() {
-        return userId;
     }
 
     public String getTitle() {
@@ -34,5 +31,13 @@ public class RecipeDto {
 
     public String getPhoto() {
         return photo;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public String getUserNickname() {
+        return userNickname;
     }
 }

@@ -14,6 +14,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 @MultipartConfig
@@ -23,7 +25,7 @@ public class CreateRecipeServlet extends HttpServlet {
     private final Cloudinary cloudinary = CloudinaryHelper.getInstance();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.sendRedirect("addRecipe.ftl");
     }
 
@@ -40,7 +42,10 @@ public class CreateRecipeServlet extends HttpServlet {
         File file = ImageHelper.makeFile(part);
         Map upload = cloudinary.uploader().upload(file, ObjectUtils.asMap("public_id", file.getName()));
 
-        Recipe recipe = new Recipe(userId, title, content, (String) upload.get("url"));
+        Date date = new Date();
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
+
+        Recipe recipe = new Recipe(userId, title, content, (String) upload.get("url"), formatForDateNow.format(date));
         recipeService.save(recipe);
 
         resp.sendRedirect("/cabinet");

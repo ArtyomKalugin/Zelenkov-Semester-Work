@@ -3,7 +3,6 @@ package com.kalugin.net.dao.impl;
 import com.kalugin.net.dao.Dao;
 import com.kalugin.net.helper.PostgresConnectionHelper;
 import com.kalugin.net.model.Recipe;
-import com.kalugin.net.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +30,8 @@ public class RecipeDao implements Dao<Recipe> {
                             resultSet.getInt("user_id"),
                             resultSet.getString("title"),
                             resultSet.getString("text"),
-                            resultSet.getString("photo")
+                            resultSet.getString("photo"),
+                            resultSet.getString("date")
                     );
                 }
             }
@@ -58,7 +58,8 @@ public class RecipeDao implements Dao<Recipe> {
                         resultSet.getInt("user_id"),
                         resultSet.getString("title"),
                         resultSet.getString("text"),
-                        resultSet.getString("photo")
+                        resultSet.getString("photo"),
+                        resultSet.getString("date")
                 );
 
                 recipes.add(recipe);
@@ -73,8 +74,8 @@ public class RecipeDao implements Dao<Recipe> {
 
     @Override
     public void save(Recipe recipe) {
-        String sql = "INSERT INTO recipe (user_id, title, text, photo) " +
-                "VALUES (?, ?, ?, ?);";
+        String sql = "INSERT INTO recipe (user_id, title, text, photo, date) " +
+                "VALUES (?, ?, ?, ?, ?);";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -82,6 +83,7 @@ public class RecipeDao implements Dao<Recipe> {
             preparedStatement.setString(2, recipe.getTitle());
             preparedStatement.setString(3, recipe.getText());
             preparedStatement.setString(4, recipe.getPhoto());
+            preparedStatement.setString(5, recipe.getData());
 
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {

@@ -77,7 +77,7 @@
             <a class="nav-link" href="/info">Об этом сайте</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/theories">Рецепты</a>
+            <a class="nav-link" href="/allRecipes">Рецепты</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/victorine">Статьи</a>

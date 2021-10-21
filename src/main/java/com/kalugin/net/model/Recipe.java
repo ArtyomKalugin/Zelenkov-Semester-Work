@@ -6,20 +6,23 @@ public class Recipe {
     private String title;
     private String text;
     private String photo;
+    private String data;
 
-    public Recipe(int id, int userId, String title, String text, String photo) {
+    public Recipe(int id, int userId, String title, String text, String photo, String data) {
         this.id = id;
         this.userId = userId;
         this.title = title;
         this.text = text;
         this.photo = photo;
+        this.data = data;
     }
 
-    public Recipe(int userId, String title, String text, String photo) {
+    public Recipe(int userId, String title, String text, String photo, String data) {
         this.userId = userId;
         this.title = title;
         this.text = text;
         this.photo = photo;
+        this.data = data;
     }
 
     public int getId() {
@@ -60,5 +63,13 @@ public class Recipe {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
     }
 }
