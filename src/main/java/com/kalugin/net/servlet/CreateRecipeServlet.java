@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.Map;
 
 @MultipartConfig
-@WebServlet(name = "createRecipe", urlPatterns = "/createRecipe")
+@WebServlet(name = "createRecipeServlet", urlPatterns = "/createRecipe")
 public class CreateRecipeServlet extends HttpServlet {
     private final RecipeServiceImpl recipeService = new RecipeServiceImpl();
     private final Cloudinary cloudinary = CloudinaryHelper.getInstance();

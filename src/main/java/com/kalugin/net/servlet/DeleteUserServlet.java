@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
 
-@WebServlet(name = "deleteUser", urlPatterns = "/deleteUser")
+@WebServlet(name = "deleteUserServlet", urlPatterns = "/deleteUser")
 public class DeleteUserServlet extends HttpServlet {
     UserServiceImpl userService = new UserServiceImpl();
 

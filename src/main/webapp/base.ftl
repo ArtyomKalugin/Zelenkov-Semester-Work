@@ -83,7 +83,7 @@
             <a class="nav-link" href="/victorine">Статьи</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/victorine">Все пользователи</a>
+            <a class="nav-link" href="/allUsers">Все пользователи</a>
         </li>
     </ul>
 
