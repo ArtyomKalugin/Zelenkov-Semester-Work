@@ -25,4 +25,14 @@ public class AllUsersServlet extends HttpServlet {
 
         req.getRequestDispatcher("allUsers.ftl").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String nickname = req.getParameter("nickname");
+        List<UserDto> users = userService.getAllByNickname(nickname);
+        users.sort(Comparator.comparing(UserDto::getNickname));
+        req.setAttribute("users", users);
+
+        req.getRequestDispatcher("allUsers.ftl").forward(req, resp);
+    }
 }

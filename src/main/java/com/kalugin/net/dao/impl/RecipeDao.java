@@ -90,4 +90,34 @@ public class RecipeDao implements Dao<Recipe> {
             LOGGER.warn("Failed to save new recipe.", throwables);
         }
     }
+
+    public List<Recipe> getByTitle(String title) {
+        try {
+            String sql = "SELECT * FROM recipe WHERE title ILIKE ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, "%" + title + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<Recipe> recipes = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Recipe recipe = new Recipe(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("text"),
+                        resultSet.getString("photo"),
+                        resultSet.getString("date")
+                );
+
+                recipes.add(recipe);
+            }
+
+            return recipes;
+        } catch (SQLException throwables) {
+            LOGGER.warn("Failed execute getAll query.", throwables);
+            return new ArrayList<>();
+        }
+    }
 }

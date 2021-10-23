@@ -53,4 +53,14 @@ public class UserServiceImpl implements UserService {
     public void changeAvatar(int id, String url) {
         userDao.changeAvatar(id, url);
     }
+
+    @Override
+    public List<UserDto> getAllByNickname(String nickname) {
+        List<User> users = userDao.getAllByNickname(nickname);
+
+        return users.stream()
+                .map(user -> new UserDto(user.getId(), user.getNickname(), user.getFirstName(), user.getSecondName(),
+                        user.getEmail(), user.getLogin(), user.getPassword(), user.getAvatar()))
+                .collect(Collectors.toList());
+    }
 }

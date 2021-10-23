@@ -12,4 +12,5 @@ public interface UserService {
     void save(User user);
     void delete(int id);
     void changeAvatar(int id, String url);
+    List<UserDto> getAllByNickname(String nickname);
 }

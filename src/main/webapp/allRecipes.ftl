@@ -10,22 +10,22 @@
 <h1>Все рецепты</h1>
 <br>
 
+    <form action="/allRecipes" method="post" novalidate>
+        <p class="lead" id="1" style="float: left; margin-right: 50px;">
+            Поиск по названию:<br>
+            <input name="title" type="text"/><br>
+        </p>
+
+        <br>
+        <p class="lead" style="margin-right: 1000px;">
+            <input type="submit" value="Найти">
+        </p>
+    </form>
+
+    <br>
+
 <#if recipes??>
     <#if recipes?has_content>
-        <form action="" method="post" novalidate>
-            <p class="lead" id="1" style="float: left; margin-right: 50px;">
-                {{ tit.title.label }}<br>
-                {{ tit.title }}<br>
-            </p>
-
-            <p class="lead" id="2" style="margin: 10px;">
-                {{ aut.author.label }}<br>
-                {{ aut.author }}<br>
-            </p>
-
-            <p class="lead" style="margin-right: 1000px;">{{ form.submit() }}</p>
-        </form>
-
         <#list recipes as recipe>
             <a href="/read_recipe/{{item[0]}}">
                 <div class="alert alert-dark" role="alert">

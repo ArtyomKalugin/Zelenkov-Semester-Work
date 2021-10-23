@@ -31,4 +31,18 @@ public class AllRecipesServlet extends HttpServlet {
 
         req.getRequestDispatcher("allRecipes.ftl").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String title = req.getParameter("title");
+        List<RecipeDto> recipes = recipeService.getByTitle(title);
+        recipes = recipes.stream()
+                .map(recipe -> new RecipeDto(recipe.getId(), recipe.getUserNickname(), recipe.getTitle(),
+                        TextHelper.editText(recipe.getText()), recipe.getPhoto(), recipe.getData()))
+                .collect(Collectors.toList());
+        Collections.reverse(recipes);
+        req.setAttribute("recipes", recipes);
+
+        req.getRequestDispatcher("allRecipes.ftl").forward(req, resp);
+    }
 }

@@ -9,4 +9,5 @@ public interface RecipeService {
     List<RecipeDto> getAll();
     RecipeDto get(int id);
     void save(Recipe recipe);
+    List<RecipeDto> getByTitle(String title);
 }

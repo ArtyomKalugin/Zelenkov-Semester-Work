@@ -36,4 +36,14 @@ public class RecipeServiceImpl implements RecipeService {
     public void save(Recipe recipe) {
         recipeDao.save(recipe);
     }
+
+    @Override
+    public List<RecipeDto> getByTitle(String title) {
+        List<Recipe> recipes = recipeDao.getByTitle(title);
+
+        return recipes.stream()
+                .map(recipe -> new RecipeDto(recipe.getId(), userDao.get(recipe.getUserId()).getNickname(),
+                        recipe.getTitle(), recipe.getText(), recipe.getPhoto(), recipe.getData()))
+                .collect(Collectors.toList());
+    }
 }
