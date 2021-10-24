@@ -1,7 +1,7 @@
 <#include 'base.ftl'>
 
 <#macro title>
-    <title>Все рецепты</title>
+    <title>Все пользователи</title>
     <link rel="shortcut icon" href="static/img/pancake.jpg" type="image/png">
 </#macro>
 

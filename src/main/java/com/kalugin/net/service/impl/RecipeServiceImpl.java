@@ -46,4 +46,24 @@ public class RecipeServiceImpl implements RecipeService {
                         recipe.getTitle(), recipe.getText(), recipe.getPhoto(), recipe.getData()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public List<RecipeDto> getByUserId(int userId) {
+        List<Recipe> recipes = recipeDao.getByUserId(userId);
+
+        return recipes.stream()
+                .map(recipe -> new RecipeDto(recipe.getId(), userDao.get(recipe.getUserId()).getNickname(),
+                        recipe.getTitle(), recipe.getText(), recipe.getPhoto(), recipe.getData()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<RecipeDto> getByUserIdAndTitle(int userId, String title) {
+        List<Recipe> recipes = recipeDao.getByUserIdAndTitle(userId, title);
+
+        return recipes.stream()
+                .map(recipe -> new RecipeDto(recipe.getId(), userDao.get(recipe.getUserId()).getNickname(),
+                        recipe.getTitle(), recipe.getText(), recipe.getPhoto(), recipe.getData()))
+                .collect(Collectors.toList());
+    }
 }

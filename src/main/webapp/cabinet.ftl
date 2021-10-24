@@ -57,7 +57,7 @@
     </tr>
     <tr>
         <td><p class="lead"><a href="/createRecipe">Добавить рецепт</a></p></td>
-        <td><p class="lead"><a href="/read_my_recipes">Мои рецепты</a></p></td>
+        <td><p class="lead"><a href="/myRecipes">Мои рецепты</a></p></td>
     </tr>
 </table>
 <br>

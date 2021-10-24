@@ -18,7 +18,7 @@ public class RecipeDao implements Dao<Recipe> {
     public Recipe get(int id) {
         try {
             Statement statement = connection.createStatement();
-            String sql = "SELECT * FROM users";
+            String sql = "SELECT * FROM recipe";
             ResultSet resultSet = statement.executeQuery(sql);
 
             Recipe recipe = null;
@@ -97,6 +97,67 @@ public class RecipeDao implements Dao<Recipe> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
 
             preparedStatement.setString(1, "%" + title + "%");
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<Recipe> recipes = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Recipe recipe = new Recipe(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("text"),
+                        resultSet.getString("photo"),
+                        resultSet.getString("date")
+                );
+
+                recipes.add(recipe);
+            }
+
+            return recipes;
+        } catch (SQLException throwables) {
+            LOGGER.warn("Failed execute getAll query.", throwables);
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Recipe> getByUserId(int userId) {
+        try {
+            String sql = "SELECT * FROM recipe WHERE user_id = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setInt(1, userId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<Recipe> recipes = new ArrayList<>();
+
+            while (resultSet.next()) {
+                Recipe recipe = new Recipe(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("user_id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("text"),
+                        resultSet.getString("photo"),
+                        resultSet.getString("date")
+                );
+
+                recipes.add(recipe);
+            }
+
+            return recipes;
+        } catch (SQLException throwables) {
+            LOGGER.warn("Failed execute getAll query.", throwables);
+            return new ArrayList<>();
+        }
+    }
+
+    public List<Recipe> getByUserIdAndTitle(int userId, String title) {
+        try {
+            String sql = "SELECT * FROM recipe WHERE user_id = ? AND title ILIKE ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setInt(1, userId);
+            preparedStatement.setString(2, "%" + title + "%");
             ResultSet resultSet = preparedStatement.executeQuery();
 
             List<Recipe> recipes = new ArrayList<>();
