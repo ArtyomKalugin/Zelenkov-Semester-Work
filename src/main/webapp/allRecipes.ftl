@@ -27,7 +27,7 @@
 <#if recipes??>
     <#if recipes?has_content>
         <#list recipes as recipe>
-            <a href="/read_recipe/{{item[0]}}">
+            <a href="/detailRecipe?id=${recipe.id}">
                 <div class="alert alert-dark" role="alert">
                     <h2>${recipe.title}</h2>
                     <div>${recipe.text}</div>

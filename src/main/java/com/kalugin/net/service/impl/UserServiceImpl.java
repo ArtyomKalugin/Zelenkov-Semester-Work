@@ -39,6 +39,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserDto getByNickname(String nickname) {
+        User user = userDao.getByNickname(nickname);
+
+        return new UserDto(user.getId(), user.getNickname(), user.getFirstName(), user.getSecondName(),
+                user.getEmail(), user.getLogin(), user.getPassword(), user.getAvatar());
+    }
+
+    @Override
     public void save(User user) {
         userDao.save(new User(user.getNickname(), user.getFirstName(), user.getSecondName(),
                 user.getEmail(), user.getLogin(), PasswordHelper.encrypt(user.getPassword()), user.getAvatar()));

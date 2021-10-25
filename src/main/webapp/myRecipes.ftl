@@ -27,7 +27,7 @@
     <#if recipes??>
         <#if recipes?has_content>
             <#list recipes as recipe>
-                <a href="/read_recipe/{{item[0]}}">
+                <a href="/myDetailRecipe?id=${recipe.id}">
                     <div class="alert alert-dark" role="alert">
                         <h2>${recipe.title}</h2>
                         <div>${recipe.text}</div>
@@ -38,7 +38,7 @@
                         <div><small class="text-muted">${recipe.userNickname} ${recipe.data}</small></div>
                         <div><small class="text-muted">Рецепт ${recipe.id}</small></div>
                         <br>
-                        <div><small class="text-muted"><a href="/delete_theory/{{item[0]}}">Удалить</a></small></div>
+                        <div><small class="text-muted" style="font-size:20px"><a href="/delete_theory/{{item[0]}}">Удалить</a></small></div>
                     </div>
                 </a>
             </#list>

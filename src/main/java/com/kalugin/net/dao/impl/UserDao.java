@@ -2,7 +2,6 @@ package com.kalugin.net.dao.impl;
 
 import com.kalugin.net.dao.Dao;
 import com.kalugin.net.helper.PostgresConnectionHelper;
-import com.kalugin.net.model.Recipe;
 import com.kalugin.net.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -181,6 +180,38 @@ public class UserDao implements Dao<User> {
         } catch (SQLException throwables) {
             LOGGER.warn("Failed execute getAll query.", throwables);
             return new ArrayList<>();
+        }
+    }
+
+    public User getByNickname(String nickname) {
+        try {
+            String sql = "SELECT * FROM users WHERE nickname = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+            preparedStatement.setString(1, nickname);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            User user = null;
+
+            while (resultSet.next()) {
+                if(resultSet.getString("nickname").equals(nickname)) {
+                    user = new User(
+                            resultSet.getInt("id"),
+                            resultSet.getString("nickname"),
+                            resultSet.getString("first_name"),
+                            resultSet.getString("second_name"),
+                            resultSet.getString("email"),
+                            resultSet.getString("login"),
+                            resultSet.getString("password"),
+                            resultSet.getString("avatar")
+                    );
+                }
+            }
+
+            return user;
+        } catch (SQLException throwables) {
+            LOGGER.warn("Failed execute get query.", throwables);
+            return null;
         }
     }
 }

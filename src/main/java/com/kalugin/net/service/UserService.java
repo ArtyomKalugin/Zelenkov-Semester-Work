@@ -9,6 +9,7 @@ public interface UserService {
     List<UserDto> getAll();
     UserDto get(int id);
     UserDto getByLogin(String login);
+    UserDto getByNickname(String nickname);
     void save(User user);
     void delete(int id);
     void changeAvatar(int id, String url);
