@@ -181,4 +181,16 @@ public class RecipeDao implements Dao<Recipe> {
             return new ArrayList<>();
         }
     }
+
+    public void delete(int id) {
+        String sql = "DELETE FROM recipe WHERE id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setInt(1, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            LOGGER.warn("Failed to delete recipe.", throwables);
+        }
+    }
 }

@@ -26,7 +26,7 @@
     <#if users??>
         <#if users?has_content>
             <#list users as user>
-                <a href="/user/{{item[0]}}">
+                <a href="/detailUser?id=${user.id}">
                     <div class="alert alert-dark" role="alert">
                         <table>
                             <tr>

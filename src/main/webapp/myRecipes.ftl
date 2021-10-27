@@ -38,7 +38,7 @@
                         <div><small class="text-muted">${recipe.userNickname} ${recipe.data}</small></div>
                         <div><small class="text-muted">Рецепт ${recipe.id}</small></div>
                         <br>
-                        <div><small class="text-muted" style="font-size:20px"><a href="/delete_theory/{{item[0]}}">Удалить</a></small></div>
+                        <div><small class="text-muted" style="font-size:20px"><a href="/deleteRecipe?id=${recipe.id}">Удалить</a></small></div>
                     </div>
                 </a>
             </#list>

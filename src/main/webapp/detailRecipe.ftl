@@ -27,7 +27,7 @@
             <tr>
                 <td><img alt="user_img" src="${user.avatar}" width="50" height="50" class="rounded-circle"></td>
 
-                <td><strong style="font-size:20px"><a href="/cabinet_other/{{t[6]}}">${recipe.userNickname}</a></strong></td>
+                <td><strong style="font-size:20px"><a href="/detailUser?id=${user.id}">${recipe.userNickname}</a></strong></td>
                 <td><small class="text-muted" style="font-size:17px"><em>${recipe.data}</em></small></td>
                 <td><small class="text-muted" style="font-size:17px">Рецепт ${recipe.id}</small></td>
             </tr>

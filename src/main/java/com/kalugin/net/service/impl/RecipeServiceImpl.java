@@ -66,4 +66,9 @@ public class RecipeServiceImpl implements RecipeService {
                         recipe.getTitle(), recipe.getText(), recipe.getPhoto(), recipe.getData()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void delete(int id) {
+        recipeDao.delete(id);
+    }
 }
