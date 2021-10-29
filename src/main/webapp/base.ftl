@@ -55,10 +55,16 @@
             margin: 0px 350px 10px 350px;
             background-color: white;
         }
-        textarea {
+        .recipe {
             width: 710px;
             height: 400px;
         }
+
+        .comment {
+            width: 710px;
+            height: 100px;
+        }
+
         table {
             border-collapse: separate;
         }

@@ -19,7 +19,7 @@
     <p class="lead">
         Введите рецепт:<br>
         <label>
-            <textarea name="content" placeholder="Рецепт..."></textarea>
+            <textarea name="content" placeholder="Рецепт..." class="recipe"></textarea>
         </label><br>
     </p>
 
