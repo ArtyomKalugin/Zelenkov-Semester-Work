@@ -25,20 +25,25 @@ public class DetailRecipeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        UserDto userNow = (UserDto) session.getAttribute("user");
         RecipeDto recipe = recipeService.get(Integer.parseInt(req.getParameter("id")));
         UserDto user = userService.getByNickname(recipe.getUserNickname());
-        List<RecipeCommentDto> comments = recipeCommentService.getAllByRecipeId(Integer.parseInt(req.getParameter("id")));
+        List<RecipeCommentDto> comments =
+                recipeCommentService.getAllByRecipeId(Integer.parseInt(req.getParameter("id")));
 
         req.setAttribute("recipe", recipe);
         req.setAttribute("u", null);
-        req.setAttribute("user", user);
+        req.setAttribute("author", user);
+        req.setAttribute("isComments", comments);
         req.setAttribute("comments", comments);
+        req.setAttribute("userNow", userNow);
 
         req.getRequestDispatcher("detailRecipe.ftl").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         HttpSession session = req.getSession();
         UserDto user = (UserDto) session.getAttribute("user");
 
@@ -48,8 +53,7 @@ public class DetailRecipeServlet extends HttpServlet {
         RecipeComment comment = new RecipeComment(userId, Integer.parseInt(req.getParameter("id")), text);
         recipeCommentService.save(comment);
 
-//        String redirect = "/detailRecipe?id=" + req.getParameter("id");
-
-        req.getRequestDispatcher("/cabinet").forward(req, resp);
+        String redirect = "/detailRecipe?id=" + req.getParameter("id");
+        resp.sendRedirect(redirect);
     }
 }
