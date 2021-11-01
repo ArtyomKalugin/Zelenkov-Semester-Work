@@ -41,7 +41,7 @@
     <br>
     <p class="lead">Всего рецептов: ${count}</p>
     <br>
-    <small class="text-muted" style="font-size:20px"><a href="/deleteRecipe?id=${detailUser.id}">Написать</a></small>
+    <small class="text-muted" style="font-size:20px"><a href="/chat?id=${detailUser.id}">Написать</a></small>
     <br>
     <br>
 <#else>

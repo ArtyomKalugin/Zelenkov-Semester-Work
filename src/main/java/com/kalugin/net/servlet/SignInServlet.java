@@ -16,7 +16,10 @@ public class SignInServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.sendRedirect("signIn.ftl");
+        req.setAttribute("err", null);
+
+        //resp.sendRedirect("signIn.ftl");
+        req.getRequestDispatcher("signIn.ftl").forward(req, resp);
     }
 
     @Override
@@ -35,8 +38,13 @@ public class SignInServlet extends HttpServlet {
                 resp.addCookie(userCookie);
 
                 resp.sendRedirect("/info");
+                return;
             }
         }
+
+        req.setAttribute("err", "Неправильный логин или пароль!");
+
+        req.getRequestDispatcher("signIn.ftl").forward(req, resp);
 
     }
 }

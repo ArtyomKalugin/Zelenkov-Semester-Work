@@ -26,7 +26,11 @@
     <br>
     <p class="lead"><input type="submit" value="Войти"></p>
     <br>
-
 </form>
+    <#if err?has_content>
+        <div class="alert alert-danger" role="alert">
+            ${err}
+        </div>
+    </#if>
 
 </#macro>
