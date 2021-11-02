@@ -3,6 +3,31 @@
 <#macro title>
 <title>Все рецепты</title>
 <link rel="shortcut icon" href="static/img/pancake.jpg" type="image/png">
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+            function showAll() {
+                const xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange=function() {
+                    if (this.readyState===4 && this.status===200) {
+                        document.getElementById("result").innerHTML=this.responseText;
+                    }
+                }
+                xmlhttp.open("GET","/allRecipes?title=", true);
+                xmlhttp.send();
+            }
+
+            function showResult(title) {
+                const xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange=function() {
+                    if (this.readyState===4 && this.status===200) {
+                        document.getElementById("result").innerHTML = this.responseText;
+                    }
+                }
+                xmlhttp.open("GET","/allRecipes?title=" + title, true);
+                xmlhttp.send();
+            }
+        </script>
 </#macro>
 
 <#macro content>
@@ -10,40 +35,18 @@
 <h1>Все рецепты</h1>
 <br>
 
-    <form action="/allRecipes" method="post" novalidate>
+    <form>
         <p class="lead" id="1" style="float: left; margin-right: 50px;">
             Поиск по названию:<br>
-            <input name="title" type="text"/><br>
+            <input name="title" type="text" onkeyup="showResult(this.value)"><br>
         </p>
 
         <br>
         <p class="lead" style="margin-right: 1000px;">
-            <input type="submit" value="Найти">
+            <input type="button" value="Показать все" onclick="showAll()">
         </p>
     </form>
 
     <br>
-
-<#if recipes??>
-    <#if recipes?has_content>
-        <#list recipes as recipe>
-            <a href="/detailRecipe?id=${recipe.id}">
-                <div class="alert alert-dark" role="alert">
-                    <h2>${recipe.title}</h2>
-                    <div>${recipe.text}</div>
-                    <br>
-                    <img src="${recipe.photo}" width="665" height="350">
-                    <br>
-                    <br>
-                    <div><small class="text-muted">${recipe.userNickname} ${recipe.data}</small></div>
-                    <div><small class="text-muted">Рецепт ${recipe.id}</small></div>
-                </div>
-            </a>
-        </#list>
-
-    <#else>
-        <p class="lead">Нет рецептов!</p>
-    </#if>
-</#if>
-
+    <div id="result"></div>
 </#macro>

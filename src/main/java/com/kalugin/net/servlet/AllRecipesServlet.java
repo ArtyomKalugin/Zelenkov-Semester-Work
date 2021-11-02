@@ -1,6 +1,7 @@
 package com.kalugin.net.servlet;
 
 import com.kalugin.net.dto.RecipeDto;
+import com.kalugin.net.helper.HTMLRecipeHelper;
 import com.kalugin.net.helper.TextHelper;
 import com.kalugin.net.service.RecipeService;
 import com.kalugin.net.service.impl.RecipeServiceImpl;
@@ -21,19 +22,6 @@ public class AllRecipesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<RecipeDto> recipes = recipeService.getAll();
-        recipes = recipes.stream()
-                .map(recipe -> new RecipeDto(recipe.getId(), recipe.getUserNickname(), recipe.getTitle(),
-                        TextHelper.editText(recipe.getText()), recipe.getPhoto(), recipe.getData()))
-                .collect(Collectors.toList());
-        Collections.reverse(recipes);
-        req.setAttribute("recipes", recipes);
-
-        req.getRequestDispatcher("allRecipes.ftl").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String title = req.getParameter("title");
         List<RecipeDto> recipes = recipeService.getByTitle(title);
         recipes = recipes.stream()
@@ -41,8 +29,9 @@ public class AllRecipesServlet extends HttpServlet {
                         TextHelper.editText(recipe.getText()), recipe.getPhoto(), recipe.getData()))
                 .collect(Collectors.toList());
         Collections.reverse(recipes);
-        req.setAttribute("recipes", recipes);
 
-        req.getRequestDispatcher("allRecipes.ftl").forward(req, resp);
+        resp.setContentType("text/plain");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(HTMLRecipeHelper.makeHTML(recipes));
     }
 }

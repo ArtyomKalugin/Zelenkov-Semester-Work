@@ -83,13 +83,13 @@
             <a class="nav-link" href="/info">Об этом сайте</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/allRecipes">Рецепты</a>
+            <a class="nav-link" href="allRecipes.ftl">Рецепты</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/allArticles">Статьи</a>
+            <a class="nav-link" href="allArticles.ftl">Статьи</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="/allUsers">Все пользователи</a>
+            <a class="nav-link" href="allUsers.ftl">Все пользователи</a>
         </li>
     </ul>
 

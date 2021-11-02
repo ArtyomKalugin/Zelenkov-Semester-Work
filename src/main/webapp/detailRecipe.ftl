@@ -10,7 +10,7 @@
 <#if u??>
     <p class="lead"><a href="/myRecipes">Назад</a></p>
 <#else>
-    <p class="lead"><a href="/allRecipes">Назад</a></p>
+    <p class="lead"><a href="allRecipes.ftl">Назад</a></p>
 </#if>
 <br>
 

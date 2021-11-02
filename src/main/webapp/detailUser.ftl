@@ -7,7 +7,7 @@
 
 <#macro content>
     <br>
-    <p class="lead"><a href="/allUsers">Назад</a></p>
+    <p class="lead"><a href="allUsers.ftl">Назад</a></p>
 
 <#if detailUser?has_content>
     <br>

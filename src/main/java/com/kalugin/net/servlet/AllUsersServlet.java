@@ -1,6 +1,8 @@
 package com.kalugin.net.servlet;
 
 import com.kalugin.net.dto.UserDto;
+import com.kalugin.net.helper.HTMLArticleHelper;
+import com.kalugin.net.helper.HTMLUsersHelper;
 import com.kalugin.net.service.UserService;
 import com.kalugin.net.service.impl.UserServiceImpl;
 
@@ -19,20 +21,12 @@ public class AllUsersServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<UserDto> users = userService.getAll();
-        users.sort(Comparator.comparing(UserDto::getNickname));
-        req.setAttribute("users", users);
-
-        req.getRequestDispatcher("allUsers.ftl").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nickname = req.getParameter("nickname");
         List<UserDto> users = userService.getAllByNickname(nickname);
         users.sort(Comparator.comparing(UserDto::getNickname));
-        req.setAttribute("users", users);
 
-        req.getRequestDispatcher("allUsers.ftl").forward(req, resp);
+        resp.setContentType("text/plain");
+        resp.setCharacterEncoding("UTF-8");
+        resp.getWriter().write(HTMLUsersHelper.makeHTML(users));
     }
 }

@@ -3,6 +3,31 @@
 <#macro title>
     <title>Все статьи</title>
     <link rel="shortcut icon" href="static/img/pancake.jpg" type="image/png">
+
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script>
+        function showAll() {
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+                if (this.readyState===4 && this.status===200) {
+                    document.getElementById("result").innerHTML=this.responseText;
+                }
+            }
+            xmlhttp.open("GET","/allArticles?title=", true);
+            xmlhttp.send();
+        }
+
+        function showResult(title) {
+            const xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange=function() {
+                if (this.readyState===4 && this.status===200) {
+                    document.getElementById("result").innerHTML = this.responseText;
+                }
+            }
+            xmlhttp.open("GET","/allArticles?title=" + title, true);
+            xmlhttp.send();
+        }
+    </script>
 </#macro>
 
 <#macro content>
@@ -10,40 +35,18 @@
     <h1>Все статьи</h1>
     <br>
 
-    <form action="/allArticles" method="post" novalidate>
+    <form>
         <p class="lead" id="1" style="float: left; margin-right: 50px;">
             Поиск по названию:<br>
-            <input name="title" type="text"/><br>
+            <input name="title" type="text" onkeyup="showResult(this.value)"/><br>
         </p>
 
         <br>
         <p class="lead" style="margin-right: 1000px;">
-            <input type="submit" value="Найти">
+            <input type="button" value="Показать все" onclick="showAll()">
         </p>
     </form>
 
     <br>
-
-    <#if articles??>
-        <#if articles?has_content>
-            <#list articles as article>
-                <a href="/detailArticle?id=${article.id}">
-                    <div class="alert alert-dark" role="alert">
-                        <h2>${article.title}</h2>
-                        <div>${article.text}</div>
-                        <br>
-                        <img src="${article.photo}" width="665" height="350">
-                        <br>
-                        <br>
-                        <div><small class="text-muted">${article.userNickname} ${article.data}</small></div>
-                        <div><small class="text-muted">Статья ${article.id}</small></div>
-                    </div>
-                </a>
-            </#list>
-
-        <#else>
-            <p class="lead">Нет статей!</p>
-        </#if>
-    </#if>
-
+    <div id="result"></div>
 </#macro>
