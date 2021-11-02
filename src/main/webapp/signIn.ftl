@@ -23,8 +23,14 @@
         <input name="password" type="password"><br>
     </p>
 
-    <br>
-    <p class="lead"><input type="submit" value="Войти"></p>
+    <p class="lead">
+        <input type="checkbox" name="rememberMe"> Запомнить меня
+    </p>
+
+    <p class="lead">
+        <input type="submit" value="Войти">
+    </p>
+
     <br>
 </form>
     <#if err?has_content>

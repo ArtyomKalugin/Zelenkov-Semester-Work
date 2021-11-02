@@ -18,7 +18,6 @@ public class SignInServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("err", null);
 
-        //resp.sendRedirect("signIn.ftl");
         req.getRequestDispatcher("signIn.ftl").forward(req, resp);
     }
 
@@ -26,16 +25,27 @@ public class SignInServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String login = req.getParameter("login");
         String hashPassword = PasswordHelper.encrypt(req.getParameter("password"));
+        String rememberMe = req.getParameter("rememberMe");
 
         for(UserDto user : userService.getAll()) {
             if(user.getHashPassword().equals(hashPassword) && user.getLogin().equals(login)) {
                 HttpSession session = req.getSession();
                 session.setAttribute("user", user);
-                session.setMaxInactiveInterval(60 * 60);
+                session.setMaxInactiveInterval(24 * 60 * 60);
 
-                Cookie userCookie = new Cookie("nickname", user.getNickname());
-                userCookie.setMaxAge(24 * 60 * 60);
-                resp.addCookie(userCookie);
+                if(rememberMe != null){
+                    Cookie[] cookies = req.getCookies();
+                    if (cookies != null) {
+                        for (Cookie c : cookies) {
+                            c.setMaxAge(0);
+                            resp.addCookie(c);
+                        }
+                    }
+
+                    Cookie userCookie = new Cookie("login", login);
+                    userCookie.setMaxAge(24 * 60 * 60);
+                    resp.addCookie(userCookie);
+                }
 
                 resp.sendRedirect("/info");
                 return;
@@ -45,6 +55,5 @@ public class SignInServlet extends HttpServlet {
         req.setAttribute("err", "Неправильный логин или пароль!");
 
         req.getRequestDispatcher("signIn.ftl").forward(req, resp);
-
     }
 }

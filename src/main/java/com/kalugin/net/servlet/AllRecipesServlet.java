@@ -1,6 +1,7 @@
 package com.kalugin.net.servlet;
 
 import com.kalugin.net.dto.RecipeDto;
+import com.kalugin.net.helper.CookieHelper;
 import com.kalugin.net.helper.HTMLRecipeHelper;
 import com.kalugin.net.helper.TextHelper;
 import com.kalugin.net.service.RecipeService;
@@ -22,6 +23,8 @@ public class AllRecipesServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CookieHelper.checkSession(req);
+
         String title = req.getParameter("title");
         List<RecipeDto> recipes = recipeService.getByTitle(title);
         recipes = recipes.stream()

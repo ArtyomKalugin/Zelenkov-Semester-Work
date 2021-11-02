@@ -1,8 +1,6 @@
 package com.kalugin.net.servlet;
 
 import com.kalugin.net.dto.UserDto;
-import com.kalugin.net.helper.CookieHelper;
-import com.kalugin.net.helper.HTMLArticleHelper;
 import com.kalugin.net.helper.HTMLUsersHelper;
 import com.kalugin.net.service.UserService;
 import com.kalugin.net.service.impl.UserServiceImpl;
@@ -16,20 +14,25 @@ import java.io.IOException;
 import java.util.Comparator;
 import java.util.List;
 
-@WebServlet(name = "allUsersServlet", urlPatterns = "/allUsers")
-public class AllUsersServlet extends HttpServlet {
+@WebServlet(name = "checkLoginServlet", urlPatterns = "/checkLogin")
+public class CheckLoginServlet extends HttpServlet {
     private final UserService userService = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        CookieHelper.checkSession(req);
+        String login = req.getParameter("login");
+        List<UserDto> users = userService.getAll();
+        String result = "free";
 
-        String nickname = req.getParameter("nickname");
-        List<UserDto> users = userService.getAllByNickname(nickname);
-        users.sort(Comparator.comparing(UserDto::getNickname));
+        for(UserDto user : users) {
+            if(user.getLogin().equals(login)) {
+                result = "taken";
+                break;
+            }
+        }
 
         resp.setContentType("text/plain");
         resp.setCharacterEncoding("UTF-8");
-        resp.getWriter().write(HTMLUsersHelper.makeHTML(users));
+        resp.getWriter().write(result);
     }
 }

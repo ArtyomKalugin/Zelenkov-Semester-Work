@@ -46,8 +46,10 @@ public class DetailArticleServlet extends HttpServlet {
         String text = req.getParameter("comment");
         int userId = user.getId();
 
-        ArticleComment comment = new ArticleComment(userId, Integer.parseInt(req.getParameter("id")), text);
-        articleCommentService.save(comment);
+        if(!text.equals("")) {
+            ArticleComment comment = new ArticleComment(userId, Integer.parseInt(req.getParameter("id")), text);
+            articleCommentService.save(comment);
+        }
 
         String redirect = "/detailArticle?id=" + req.getParameter("id");
         resp.sendRedirect(redirect);

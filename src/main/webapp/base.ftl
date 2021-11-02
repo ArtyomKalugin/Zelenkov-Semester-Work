@@ -71,6 +71,14 @@
         td {
             padding-right: 50px;
         }
+        .error {
+            font-size: 25px;
+            color: #900;
+        }
+
+        .error.active {
+            font-size: 25px;
+        }
     </style>
 </head>
 <body>

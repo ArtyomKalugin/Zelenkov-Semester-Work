@@ -39,14 +39,16 @@ public class CreateRecipeServlet extends HttpServlet {
         int userId = user.getId();
         Part part = req.getPart("photo");
 
-        File file = ImageHelper.makeFile(part);
-        Map upload = cloudinary.uploader().upload(file, ObjectUtils.asMap("public_id", file.getName()));
+        if(!title.equals("") && !content.equals("")) {
+            File file = ImageHelper.makeFile(part);
+            Map upload = cloudinary.uploader().upload(file, ObjectUtils.asMap("public_id", file.getName()));
 
-        Date date = new Date();
-        SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
+            Date date = new Date();
+            SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
 
-        Recipe recipe = new Recipe(userId, title, content, (String) upload.get("url"), formatForDateNow.format(date));
-        recipeService.save(recipe);
+            Recipe recipe = new Recipe(userId, title, content, (String) upload.get("url"), formatForDateNow.format(date));
+            recipeService.save(recipe);
+        }
 
         resp.sendRedirect("/cabinet");
     }

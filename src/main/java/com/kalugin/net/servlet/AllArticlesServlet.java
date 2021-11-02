@@ -1,16 +1,18 @@
 package com.kalugin.net.servlet;
 
 import com.kalugin.net.dto.ArticleDto;
+import com.kalugin.net.dto.UserDto;
+import com.kalugin.net.helper.CookieHelper;
 import com.kalugin.net.helper.HTMLArticleHelper;
 import com.kalugin.net.helper.TextHelper;
 import com.kalugin.net.service.ArticleService;
+import com.kalugin.net.service.UserService;
 import com.kalugin.net.service.impl.ArticleServiceImpl;
+import com.kalugin.net.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -19,9 +21,12 @@ import java.util.stream.Collectors;
 @WebServlet(name = "allArticlesServlet", urlPatterns = "/allArticles")
 public class AllArticlesServlet extends HttpServlet {
     private final ArticleService articleService = new ArticleServiceImpl();
+    private final UserService userService = new UserServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CookieHelper.checkSession(req);
+
         String title = req.getParameter("title");
         List<ArticleDto> articles = articleService.getByTitle(title);
         articles = articles.stream()

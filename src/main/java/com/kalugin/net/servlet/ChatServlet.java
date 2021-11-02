@@ -2,6 +2,7 @@ package com.kalugin.net.servlet;
 
 import com.kalugin.net.dto.MessageDto;
 import com.kalugin.net.dto.UserDto;
+import com.kalugin.net.helper.CookieHelper;
 import com.kalugin.net.model.Message;
 import com.kalugin.net.service.ChatService;
 import com.kalugin.net.service.impl.ChatServiceImpl;
@@ -25,6 +26,8 @@ public class ChatServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        CookieHelper.checkSession(req);
+
         HttpSession session = req.getSession();
         UserDto userNow = (UserDto) session.getAttribute("user");
         int userToId = Integer.parseInt(req.getParameter("id"));
@@ -49,10 +52,12 @@ public class ChatServlet extends HttpServlet {
         Date date = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
 
-        Message message = new Message(userToId, user.getId(), text, formatForDateNow.format(date),
-                user.getNickname(), user.getAvatar());
-        chatService.save(message);
-
+        if(!text.equals("")) {
+            Message message = new Message(userToId, user.getId(), text, formatForDateNow.format(date),
+                    user.getNickname(), user.getAvatar());
+            chatService.save(message);
+        }
+        
         String redirect = "/chat?id=" + req.getParameter("id");
         resp.sendRedirect(redirect);
     }

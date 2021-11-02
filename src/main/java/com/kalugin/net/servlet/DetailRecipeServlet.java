@@ -50,8 +50,10 @@ public class DetailRecipeServlet extends HttpServlet {
         String text = req.getParameter("comment");
         int userId = user.getId();
 
-        RecipeComment comment = new RecipeComment(userId, Integer.parseInt(req.getParameter("id")), text);
-        recipeCommentService.save(comment);
+        if(!text.equals("")) {
+            RecipeComment comment = new RecipeComment(userId, Integer.parseInt(req.getParameter("id")), text);
+            recipeCommentService.save(comment);
+        }
 
         String redirect = "/detailRecipe?id=" + req.getParameter("id");
         resp.sendRedirect(redirect);
