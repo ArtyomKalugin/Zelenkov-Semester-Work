@@ -1,4 +1,4 @@
-package com.kalugin.net.servlet;
+package com.kalugin.net.servlet.userServlet;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;

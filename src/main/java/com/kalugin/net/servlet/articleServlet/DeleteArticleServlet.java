@@ -1,4 +1,4 @@
-package com.kalugin.net.servlet;
+package com.kalugin.net.servlet.articleServlet;
 
 import com.kalugin.net.service.ArticleService;
 import com.kalugin.net.service.impl.ArticleServiceImpl;

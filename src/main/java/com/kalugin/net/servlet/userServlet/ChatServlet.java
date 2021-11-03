@@ -1,4 +1,4 @@
-package com.kalugin.net.servlet;
+package com.kalugin.net.servlet.userServlet;
 
 import com.kalugin.net.dto.MessageDto;
 import com.kalugin.net.dto.UserDto;

@@ -1,4 +1,4 @@
-package com.kalugin.net.servlet;
+package com.kalugin.net.servlet.infoServlet;
 
 import com.kalugin.net.helper.CookieHelper;
 import com.kalugin.net.service.UserService;

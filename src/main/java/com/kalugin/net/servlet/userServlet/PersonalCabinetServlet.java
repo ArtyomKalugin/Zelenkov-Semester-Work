@@ -1,4 +1,4 @@
-package com.kalugin.net.servlet;
+package com.kalugin.net.servlet.userServlet;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;

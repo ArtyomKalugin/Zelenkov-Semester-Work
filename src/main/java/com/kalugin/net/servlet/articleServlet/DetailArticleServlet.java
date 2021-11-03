@@ -1,4 +1,4 @@
-package com.kalugin.net.servlet;
+package com.kalugin.net.servlet.articleServlet;
 
 import com.kalugin.net.dto.*;
 import com.kalugin.net.model.Article;

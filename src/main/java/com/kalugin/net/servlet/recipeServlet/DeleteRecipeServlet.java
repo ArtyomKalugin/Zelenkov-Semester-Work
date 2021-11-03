@@ -1,4 +1,4 @@
-package com.kalugin.net.servlet;
+package com.kalugin.net.servlet.recipeServlet;
 
 import com.kalugin.net.service.impl.RecipeServiceImpl;
 
