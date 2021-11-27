@@ -7,7 +7,7 @@
 
 <#macro content>
     <br>
-    <p class="lead"><a href="allUsers.ftl">Назад</a></p>
+    <p class="lead"><a href="/allUsers">Назад</a></p>
 
 <#if detailUser?has_content>
     <br>
@@ -40,6 +40,7 @@
     </table>
     <br>
     <p class="lead">Всего рецептов: ${count}</p>
+    <p class="lead">Почта: ${detailUser.email}</p>
     <br>
     <small class="text-muted" style="font-size:20px"><a href="/chat?id=${detailUser.id}">Написать</a></small>
     <br>
