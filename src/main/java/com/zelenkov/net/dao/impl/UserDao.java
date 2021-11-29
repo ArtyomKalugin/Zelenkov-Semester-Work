@@ -2,16 +2,13 @@ package com.zelenkov.net.dao.impl;
 
 import com.zelenkov.net.dao.Dao;
 import com.zelenkov.net.helper.PostgresConnectionHelper;
-import com.zelenkov.net.model.User;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.zelenkov.net.model.User;;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDao implements Dao<User> {
-    public static final Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
     private final Connection connection = PostgresConnectionHelper.getConnection();
 
     @Override
@@ -40,7 +37,7 @@ public class UserDao implements Dao<User> {
 
             return user;
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed execute get query.", throwables);
+            System.out.println(throwables.getMessage());
             return null;
         }
     }
@@ -70,7 +67,7 @@ public class UserDao implements Dao<User> {
 
             return user;
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed execute get query.", throwables);
+            System.out.println(throwables.getMessage());
             return null;
         }
     }
@@ -83,7 +80,7 @@ public class UserDao implements Dao<User> {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed to delete user.", throwables);
+            System.out.println(throwables.getMessage());
         }
     }
 
@@ -96,7 +93,7 @@ public class UserDao implements Dao<User> {
             preparedStatement.setInt(2, id);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed to update user.", throwables);
+            System.out.println(throwables.getMessage());
         }
     }
 
@@ -126,7 +123,7 @@ public class UserDao implements Dao<User> {
 
             return users;
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed execute getAll query.", throwables);
+            System.out.println(throwables.getMessage());
             return new ArrayList<>();
         }
     }
@@ -148,7 +145,7 @@ public class UserDao implements Dao<User> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed to save new user.", throwables);
+            System.out.println(throwables.getMessage());
         }
     }
 
@@ -178,7 +175,7 @@ public class UserDao implements Dao<User> {
 
             return users;
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed execute getAll query.", throwables);
+            System.out.println(throwables.getMessage());
             return new ArrayList<>();
         }
     }
@@ -210,7 +207,7 @@ public class UserDao implements Dao<User> {
 
             return user;
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed execute get query.", throwables);
+            System.out.println(throwables.getMessage());
             return null;
         }
     }

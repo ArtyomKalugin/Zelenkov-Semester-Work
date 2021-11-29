@@ -38,7 +38,13 @@
                         <div><small class="text-muted">${recipe.userNickname} ${recipe.data}</small></div>
                         <div><small class="text-muted">Рецепт ${recipe.id}</small></div>
                         <br>
-                        <div><small class="text-muted" style="font-size:20px"><a href="/deleteRecipe?id=${recipe.id}">Удалить</a></small></div>
+                        <table>
+                            <tr>
+                                <td><div><small class="text-muted" style="font-size:20px"><a href="/deleteRecipe?id=${recipe.id}">Удалить</a></small></div></td>
+                                <td><div><small class="text-muted" style="font-size:20px"><a href="/editRecipe?id=${recipe.id}">Редактировать</a></small></div></td>
+                            </tr>
+                        </table>
+
                     </div>
                 </a>
             </#list>

@@ -3,9 +3,9 @@ package com.zelenkov.net.dto;
 public class RecipeDto {
     private final int id;
     private final String userNickname;
-    private final String title;
-    private final String text;
-    private final String photo;
+    private String title;
+    private String text;
+    private String photo;
     private final String data;
 
     public RecipeDto(int id, String userNickname, String title, String text, String photo, String data) {
@@ -39,5 +39,17 @@ public class RecipeDto {
 
     public String getUserNickname() {
         return userNickname;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

@@ -9,16 +9,41 @@ import java.nio.file.Paths;
 
 public class ImageHelper {
 
-    public static File makeFile(Part part) throws IOException {
-        String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+    public static String makeFile(Part part) throws IOException {
         InputStream content = part.getInputStream();
-        File file = new File(fileName);
-        FileOutputStream outputStream = new FileOutputStream(file);
-        byte[] buffer = new byte[content.available()];
-        content.read(buffer);
-        outputStream.write(buffer);
+        String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+        String path = "/Users/artemkalugin/IdeaProjects/Semester Work/src/main/webapp/tmp/" + fileName;
 
-        return file;
+        try(FileOutputStream fos = new FileOutputStream(path)) {
+            byte[] buffer = new byte[content.available()];
+            content.read(buffer, 0, buffer.length);
+            fos.write(buffer, 0, buffer.length);
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+
+        return fileName;
     }
+
+    public static String makeFile(Part part, String path) throws IOException {
+        InputStream content = part.getInputStream();
+        String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+
+        File file = new File(path + File.separator + fileName);
+        System.out.println(file.getAbsolutePath());
+
+        try(FileOutputStream fos = new FileOutputStream(path + File.separator + fileName)) {
+            byte[] buffer = new byte[content.available()];
+            content.read(buffer, 0, buffer.length);
+            fos.write(buffer, 0, buffer.length);
+        }
+        catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
+
+        return fileName;
+    }
+
 
 }

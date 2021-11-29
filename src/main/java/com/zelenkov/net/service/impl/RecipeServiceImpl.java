@@ -71,4 +71,9 @@ public class RecipeServiceImpl implements RecipeService {
     public void delete(int id) {
         recipeDao.delete(id);
     }
+
+    @Override
+    public void changeData(int id, String title, String text, String photo) {
+        recipeDao.changeData(id, title, text, photo);
+    }
 }

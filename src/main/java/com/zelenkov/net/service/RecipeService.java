@@ -13,4 +13,5 @@ public interface RecipeService {
     List<RecipeDto> getByUserId(int userId);
     List<RecipeDto> getByUserIdAndTitle(int userId, String title);
     void delete(int id);
+    void changeData(int id, String title, String text, String photo);
 }

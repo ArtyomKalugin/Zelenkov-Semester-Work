@@ -1,9 +1,6 @@
 package com.zelenkov.net.servlet.recipeServlet;
 
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import com.zelenkov.net.dto.UserDto;
-import com.zelenkov.net.helper.CloudinaryHelper;
 import com.zelenkov.net.helper.ImageHelper;
 import com.zelenkov.net.model.Recipe;
 import com.zelenkov.net.service.impl.RecipeServiceImpl;
@@ -12,17 +9,14 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Map;
 
 @MultipartConfig
 @WebServlet(name = "createRecipeServlet", urlPatterns = "/createRecipe")
 public class CreateRecipeServlet extends HttpServlet {
     private final RecipeServiceImpl recipeService = new RecipeServiceImpl();
-    private final Cloudinary cloudinary = CloudinaryHelper.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -40,13 +34,13 @@ public class CreateRecipeServlet extends HttpServlet {
         Part part = req.getPart("photo");
 
         if(!title.equals("") && !content.equals("")) {
-            File file = ImageHelper.makeFile(part);
-            Map upload = cloudinary.uploader().upload(file, ObjectUtils.asMap("public_id", file.getName()));
+            String path = getServletContext().getRealPath("/tmp");
+            String fileName = ImageHelper.makeFile(part, path);
 
             Date date = new Date();
             SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
 
-            Recipe recipe = new Recipe(userId, title, content, (String) upload.get("url"), formatForDateNow.format(date));
+            Recipe recipe = new Recipe(userId, title, content, "tmp/" + fileName, formatForDateNow.format(date));
             recipeService.save(recipe);
         }
 

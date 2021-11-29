@@ -37,10 +37,6 @@ public class Recipe {
         return userId;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     public String getText() {
         return text;
     }
@@ -67,9 +63,5 @@ public class Recipe {
 
     public String getData() {
         return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
     }
 }

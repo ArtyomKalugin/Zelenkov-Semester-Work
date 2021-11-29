@@ -32,16 +32,8 @@ public class Message {
         return toUserId;
     }
 
-    public void setToUserId(int toUserId) {
-        this.toUserId = toUserId;
-    }
-
     public int getFromUserId() {
         return fromUserId;
-    }
-
-    public void setFromUserId(int fromUserId) {
-        this.fromUserId = fromUserId;
     }
 
     public String getText() {
@@ -56,16 +48,8 @@ public class Message {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public String getFromUserNickname() {
         return fromUserNickname;
-    }
-
-    public void setFromUserNickname(String fromUserNickname) {
-        this.fromUserNickname = fromUserNickname;
     }
 
     public String getAvatar() {

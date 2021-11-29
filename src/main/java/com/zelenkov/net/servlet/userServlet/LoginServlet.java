@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         String password = req.getParameter("password");
 
         User newUser = new User(nickname, firstName, secondName, email, login, password,
-                "https://res.cloudinary.com/dwzcudur6/image/upload/v1634711026/defaultUser_msfkll.png");
+                "static/img/standard.png");
 
         userService.save(newUser);
         UserDto user = userService.getByLogin(login);

@@ -3,15 +3,12 @@ package com.zelenkov.net.dao.impl;
 import com.zelenkov.net.dao.Dao;
 import com.zelenkov.net.helper.PostgresConnectionHelper;
 import com.zelenkov.net.model.Recipe;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class RecipeDao implements Dao<Recipe> {
-    public static final Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
     private final Connection connection = PostgresConnectionHelper.getConnection();
 
     @Override
@@ -38,7 +35,7 @@ public class RecipeDao implements Dao<Recipe> {
 
             return recipe;
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed execute get query.", throwables);
+            System.out.println(throwables.getMessage());
             return null;
         }
     }
@@ -67,7 +64,7 @@ public class RecipeDao implements Dao<Recipe> {
 
             return recipes;
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed execute getAll query.", throwables);
+            System.out.println(throwables.getMessage());
             return new ArrayList<>();
         }
     }
@@ -87,7 +84,7 @@ public class RecipeDao implements Dao<Recipe> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed to save new recipe.", throwables);
+            System.out.println(throwables.getMessage());
         }
     }
 
@@ -116,7 +113,7 @@ public class RecipeDao implements Dao<Recipe> {
 
             return recipes;
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed execute getAll query.", throwables);
+            System.out.println(throwables.getMessage());
             return new ArrayList<>();
         }
     }
@@ -146,7 +143,7 @@ public class RecipeDao implements Dao<Recipe> {
 
             return recipes;
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed execute getAll query.", throwables);
+            System.out.println(throwables.getMessage());
             return new ArrayList<>();
         }
     }
@@ -177,7 +174,7 @@ public class RecipeDao implements Dao<Recipe> {
 
             return recipes;
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed execute getAll query.", throwables);
+            System.out.println(throwables.getMessage());
             return new ArrayList<>();
         }
     }
@@ -190,7 +187,22 @@ public class RecipeDao implements Dao<Recipe> {
             preparedStatement.setInt(1, id);
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed to delete recipe.", throwables);
+            System.out.println(throwables.getMessage());
+        }
+    }
+
+    public void changeData(int id, String title, String text, String photo) {
+        String sql = "UPDATE recipe SET photo = ?, title = ?, text = ? WHERE recipe.id = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, photo);
+            preparedStatement.setString(2, title);
+            preparedStatement.setString(3, text);
+            preparedStatement.setInt(4, id);
+            preparedStatement.executeUpdate();
+        } catch (SQLException throwables) {
+            System.out.println(throwables.getMessage());
         }
     }
 }

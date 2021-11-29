@@ -3,8 +3,6 @@ package com.zelenkov.net.dao.impl;
 import com.zelenkov.net.dao.Dao;
 import com.zelenkov.net.helper.PostgresConnectionHelper;
 import com.zelenkov.net.model.Message;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ChatDao implements Dao<Message> {
-    public static final Logger LOGGER = LoggerFactory.getLogger(UserDao.class);
     private final Connection connection = PostgresConnectionHelper.getConnection();
 
     @Override
@@ -43,7 +40,7 @@ public class ChatDao implements Dao<Message> {
 
             preparedStatement.executeUpdate();
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed to save new message.", throwables);
+            System.out.println(throwables.getMessage());
         }
     }
 
@@ -74,7 +71,7 @@ public class ChatDao implements Dao<Message> {
 
             return messages;
         } catch (SQLException throwables) {
-            LOGGER.warn("Failed execute getAll query.", throwables);
+            System.out.println(throwables.getMessage());
             return new ArrayList<>();
         }
     }

@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(filterName = "authenticationFilter", urlPatterns = {"/createRecipe", "/createArticle", "/deleteArticle",
-        "/deleteRecipe", "/logout", "/myArticles", "/myDetailArticle", "/myDetailRecipe", "/myRecipes",
-        "/cabinet", "/chat"})
+@WebFilter(filterName = "authenticationFilter", urlPatterns = {"/createRecipe", "/deleteRecipe", "/logout",
+        "/myDetailRecipe", "/myRecipes", "/cabinet", "/chat", "/editRecipe"})
 public class AuthenticationFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -26,7 +25,6 @@ public class AuthenticationFilter implements Filter {
 
         try {
             UserDto user = (UserDto) session.getAttribute("user");
-            System.out.println(user.getEmail());
             filterChain.doFilter(servletRequest, servletResponse);
         } catch (Exception e) {
             response.sendRedirect("/signIn");
