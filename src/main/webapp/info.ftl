@@ -14,7 +14,7 @@
     <br>
 
     <p class="lead">
-        <strong>"Semester Work"</strong> — напиши сюда какой-нибудь <em>текст</em>.
+        <strong>"Website"</strong> — моя <em>семестровая работа</em>.
         <br>
     </p>
 
